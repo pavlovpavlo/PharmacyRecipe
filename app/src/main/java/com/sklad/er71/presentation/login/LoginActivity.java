@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -17,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.sklad.er71.presentation.menu.MenuActivity;
 import com.sklad.er71.R;
 import com.sklad.er71.busines.BaseActivity;
+import com.sklad.er71.presentation.password_recover.PasswordRecoverActivity;
 import com.sklad.er71.util.LocalSharedUtil;
 import com.sklad.er71.util.Util;
 
@@ -27,7 +29,7 @@ public class LoginActivity extends BaseActivity {
     private LinearLayout auth;
     private FirebaseFirestore firestore;
     private String userId;
-
+    private TextView text_password_recover;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void initViews() {
+        text_password_recover= findViewById(R.id.text_password_recover);
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
         auth = findViewById(R.id.auth);
@@ -45,6 +48,10 @@ public class LoginActivity extends BaseActivity {
             if(checkData())
                 authorization();
         });
+        text_password_recover.setOnClickListener(view -> {
+            startActivity(new Intent(LoginActivity.this, PasswordRecoverActivity.class));
+        });
+
     }
 
     private boolean checkData(){

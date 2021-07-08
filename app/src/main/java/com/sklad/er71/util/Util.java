@@ -1,0 +1,21 @@
+package com.sklad.er71.util;
+
+import android.text.TextUtils;
+import android.util.Patterns;
+
+public class Util {
+
+    public static final String NAMESPACE = "http://localhost/wsdlo";
+    public static final String METHODNAME = "GetRecipe_SNILS";
+    public static final String METHODNAME_NEXT = "ResiduesPharm";
+    public static final String WSDL = "http://87.244.7.142:9000/WebServicesDLO/ws/GetRecipeSNILS.1cws";
+    public static final String SOAP_ACTION = NAMESPACE + "#kltro:" + METHODNAME;
+    public static final String SOAP_ACTION_NEXT = NAMESPACE + "#kltro:" + METHODNAME_NEXT;
+    public static final String USER_PASSWORD = "webtest:777111";
+
+    public static String TAG = "soap";
+
+    public static boolean isValidEmail(String email){
+        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+}

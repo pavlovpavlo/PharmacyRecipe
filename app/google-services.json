@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "254878668319",
+    "project_id": "er71-3cf23",
+    "storage_bucket": "er71-3cf23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254878668319:android:c3949dc8c0b52607ad272a",
+        "android_client_info": {
+          "package_name": "com.sklad.er71"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254878668319-aom0ri285dvoqecn9dlgi0oquqipr68a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sklad.er71",
+            "certificate_hash": "314c3766ad9afe859b2022d739254ce8c9538b63"
+          }
+        },
+        {
+          "client_id": "254878668319-uigdvlj1hk1in3hm34m4tlbk2b3dl7sa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYNuDpLIX9OuWBOzbc_qGYL8DASV8idM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254878668319-uigdvlj1hk1in3hm34m4tlbk2b3dl7sa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

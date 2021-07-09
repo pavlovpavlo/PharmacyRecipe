@@ -22,23 +22,27 @@ public class BaseActivity extends AppCompatActivity implements BasicView {
 
     @Override
     public void showError(String error) {
-        CountDownTimer countDownTimer;
-        findViewById(R.id.error_notification).setVisibility(View.VISIBLE);
-        findViewById(R.id.error_notification).setOnClickListener(v -> findViewById(R.id.error_notification).setVisibility(View.GONE));
-        ((TextView) findViewById(R.id.notification_text)).setText(error);
-
-        countDownTimer = new CountDownTimer(ERROR_TIME_SECOND * 1000, 1000) {
+        runOnUiThread(new Runnable() {
             @Override
-            public void onTick(long millisUntilFinished) {
-            }
+            public void run() {
+                CountDownTimer countDownTimer;
+                findViewById(R.id.error_notification).setVisibility(View.VISIBLE);
+                findViewById(R.id.error_notification).setOnClickListener(v -> findViewById(R.id.error_notification).setVisibility(View.GONE));
+                ((TextView) findViewById(R.id.notification_text)).setText(error);
 
-            @Override
-            public void onFinish() {
-                findViewById(R.id.error_notification).setVisibility(View.GONE);
-            }
-        };
-        countDownTimer.start();
+                countDownTimer = new CountDownTimer(ERROR_TIME_SECOND * 1000, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                    }
 
+                    @Override
+                    public void onFinish() {
+                        findViewById(R.id.error_notification).setVisibility(View.GONE);
+                    }
+                };
+                countDownTimer.start();
+            }
+        });
     }
 
     @Override

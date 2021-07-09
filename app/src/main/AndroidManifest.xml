@@ -14,6 +14,8 @@
         <activity android:name=".presentation.recipe.RecipeActivity"></activity>
         <activity android:name=".presentation.recipes.PreferentialPrescriptionActivity" />
         <activity android:name=".presentation.recipes.RecipesActivity" />
+        <activity android:name=".presentation.recipe.RecipeDetailActivity" />
+        <activity android:name=".presentation.contact_us.ContactUsActivity" />
         <activity android:name=".presentation.reg.RegistrationActivity" />
         <activity android:name=".presentation.login.LoginActivity" />
         <activity android:name=".presentation.menu.MenuActivity" />

@@ -5,8 +5,10 @@ package com.sklad.er71.Enum.ResiduesPharm;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 
-public class MTablerowapp {
+
+public class MTablerowapp implements Serializable {
 
     @SerializedName("m:drugstore")
     @Expose
@@ -97,4 +99,17 @@ public class MTablerowapp {
         this.mKSo = mKSo;
     }
 
+    @Override
+    public String toString() {
+        return "MTablerowapp{" +
+                "mDrugstore=" + mDrugstore +
+                ", mDrugstoreX=" + mDrugstoreX +
+                ", mDrugstoreY=" + mDrugstoreY +
+                ", mFias=" + mFias +
+                ", mTN='" + mTN + '\'' +
+                ", mLF='" + mLF + '\'' +
+                ", mDosage='" + mDosage + '\'' +
+                ", mKSo=" + mKSo +
+                '}';
+    }
 }

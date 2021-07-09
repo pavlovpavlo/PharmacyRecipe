@@ -15,10 +15,10 @@ public class MTablerowrecipe implements Serializable {
     private String mData;
     @SerializedName("m:series")
     @Expose
-    private Integer mSeries;
+    private String mSeries;
     @SerializedName("m:number")
     @Expose
-    private Integer mNumber;
+    private String mNumber;
     @SerializedName("m:MNN")
     @Expose
     private String mMNN;
@@ -49,6 +49,9 @@ public class MTablerowrecipe implements Serializable {
     @SerializedName("m:QRString")
     @Expose
     private String mQRString;
+    @SerializedName("m:srok")
+    @Expose
+    private String mSrok;
 
     public String getmData() {
         return mData;
@@ -58,19 +61,19 @@ public class MTablerowrecipe implements Serializable {
         this.mData = mData;
     }
 
-    public Integer getmSeries() {
+    public String getmSeries() {
         return mSeries;
     }
 
-    public void setmSeries(Integer mSeries) {
+    public void setmSeries(String mSeries) {
         this.mSeries = mSeries;
     }
 
-    public Integer getmNumber() {
+    public String getmNumber() {
         return mNumber;
     }
 
-    public void setmNumber(Integer mNumber) {
+    public void setmNumber(String mNumber) {
         this.mNumber = mNumber;
     }
 
@@ -154,6 +157,14 @@ public class MTablerowrecipe implements Serializable {
         this.mQRString = mQRString;
     }
 
+    public String getmSrok() {
+        return mSrok;
+    }
+
+    public void setmSrok(String mSrok) {
+        this.mSrok = mSrok;
+    }
+
     @Override
     public String toString() {
         return "MTablerowrecipe{" +
@@ -170,6 +181,7 @@ public class MTablerowrecipe implements Serializable {
                 ", mDoctor='" + mDoctor + '\'' +
                 ", mKolV=" + mKolV +
                 ", mQRString='" + mQRString + '\'' +
+                ", mSrok='" + mSrok + '\'' +
                 '}';
     }
 }

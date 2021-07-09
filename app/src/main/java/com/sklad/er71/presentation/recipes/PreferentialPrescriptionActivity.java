@@ -133,19 +133,13 @@ public class PreferentialPrescriptionActivity extends BaseActivity implements Re
                 try {
                     jsonObj = XML.toJSONObject(responseDump);
                 } catch (JSONException e) {
-                    Log.e("JSON exception", e.getMessage());
-                    e.printStackTrace();
+                    showError(e.getMessage());
+                    stopLoaderUiThread();
                 }
 
                 Gson gson = new GsonBuilder().create();
 
                 Recipe = gson.fromJson(jsonObj.toString(), RecipeSNILSResponse.class);
-                Recipe.getSoapEnvelope().getSoapBody().getmGetRecipeSNILSResponse().
-                        getmReturn().getmTablerowrecipe().get(0).getmLPU().toString();
-
-
-                Log.d("JSON", Recipe.getSoapEnvelope().getSoapBody().getmGetRecipeSNILSResponse().
-                        getmReturn().getmTablerowrecipe().get(0).getmLPU());
 
 
             } catch (IOException e) {

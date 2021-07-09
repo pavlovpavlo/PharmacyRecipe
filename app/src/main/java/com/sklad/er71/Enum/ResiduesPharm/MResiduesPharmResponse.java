@@ -5,8 +5,10 @@ package com.sklad.er71.Enum.ResiduesPharm;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 
-public class MResiduesPharmResponse {
+
+public class MResiduesPharmResponse implements Serializable {
 
     @SerializedName("xmlns:m")
     @Expose

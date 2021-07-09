@@ -4,10 +4,11 @@ package com.sklad.er71.Enum.ResiduesPharm;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 
-public class MReturn {
+public class MReturn implements Serializable {
 
     @SerializedName("xmlns:xs")
     @Expose

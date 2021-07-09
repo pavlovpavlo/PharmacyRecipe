@@ -28,7 +28,7 @@ class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> {
         list = new ArrayList<>();
     }
 
-    public interface OnRecipeClickListener{
+    public interface OnRecipeClickListener {
         void serviceSelected(MTablerowrecipe item);
     }
 

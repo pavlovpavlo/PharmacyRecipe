@@ -43,6 +43,7 @@ public class RecipeActivity extends BaseActivity {
     private MTablerowrecipe item;
     private TextView recipe;
     private LinearLayout map;
+    private LinearLayout qr;
     private LinearLayout detail;
 
     @Override
@@ -52,6 +53,7 @@ public class RecipeActivity extends BaseActivity {
 
         recipe = findViewById(R.id.recipe);
         map = findViewById(R.id.map);
+        qr = findViewById(R.id.qr);
         detail = findViewById(R.id.detail);
         item = (MTablerowrecipe) getIntent().getSerializableExtra("recipe");
 
@@ -63,6 +65,8 @@ public class RecipeActivity extends BaseActivity {
             mapIntent.setPackage("com.google.android.apps.maps");
             startActivity(mapIntent);
         });
+
+        qr.setOnClickListener(v -> RecipeQRDialog.display(getSupportFragmentManager(), item.getmQRString()));
 
         startLoader();
         Thread thread = new Thread(() -> {

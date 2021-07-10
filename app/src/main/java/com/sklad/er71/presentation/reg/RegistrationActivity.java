@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -13,6 +14,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sklad.er71.presentation.menu.MenuActivity;
@@ -24,10 +26,12 @@ import com.sklad.er71.util.Util;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.com.sapereaude.maskedEditText.MaskedEditText;
+
 public class RegistrationActivity extends BaseActivity {
 
     private EditText email;
-    private EditText snils;
+    private MaskedEditText snils;
     private EditText pass;
     private EditText passRepeat;
     private LinearLayout reg;
@@ -95,7 +99,10 @@ public class RegistrationActivity extends BaseActivity {
                 })
                 .addOnFailureListener(e -> {
                     stopLoader();
-                    showError(e.getMessage());
+                    if (e instanceof FirebaseAuthUserCollisionException)
+                    showError("Пользователь с таким email уже зарегистрирован");
+                    else
+                        showError("Ошибка регистрации. Попробуйте пожалуйста позже.");
                 });
     }
 
@@ -111,6 +118,7 @@ public class RegistrationActivity extends BaseActivity {
                 addOnSuccessListener(aVoid -> {
                     stopLoader();
                     LocalSharedUtil.setSnilsParameter(snilsText, getApplicationContext());
+                    Toast.makeText(getApplicationContext(), "Регистрация успешна", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(RegistrationActivity.this, MenuActivity.class));
                     finish();
                 }).

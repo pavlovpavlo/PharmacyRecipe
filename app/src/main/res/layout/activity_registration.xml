@@ -27,6 +27,15 @@
                 android:textColor="@color/black"
                 android:textSize="28dp" />
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/black"
+            android:text="Email"/>
 
         <EditText
             android:id="@+id/email"
@@ -35,49 +44,86 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:background="@color/white"
-            android:hint="Email"
+            android:ems="10"
+            android:inputType="text"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:textColor="@color/black"
             android:textSize="16sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/black"
+            android:text="СНИЛС"/>
 
-        <EditText
+        <br.com.sapereaude.maskedEditText.MaskedEditText
             android:id="@+id/snils"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
+
             android:layout_marginEnd="16dp"
             android:background="@color/white"
-            android:hint="СНИЛС"
+            app:mask="###-###-### ##"
+            android:hint="00000000000"
+            app:allowed_chars="1234567890"
+            app:keep_hint="true"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/black"
+            android:text="Пароль"/>
         <EditText
             android:id="@+id/pass"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:background="@color/white"
-            android:hint="Пароль"
+            android:ems="10"
+            android:imeOptions="actionGo"
+            android:inputType="textPassword"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/black"
+            android:text="Повторите пароль"/>
         <EditText
             android:id="@+id/pass_repeat"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
+
             android:layout_marginEnd="16dp"
             android:background="@color/white"
-            android:hint="Повторите пароль"
+            android:ems="10"
+            android:imeOptions="actionGo"
+            android:inputType="textPassword"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:textColor="@color/black"

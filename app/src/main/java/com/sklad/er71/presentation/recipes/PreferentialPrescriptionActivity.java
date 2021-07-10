@@ -17,6 +17,7 @@ import com.sklad.er71.Enum.Recipe_SNILS.RecipeSNILSResponse;
 import com.sklad.er71.R;
 import com.sklad.er71.busines.BaseActivity;
 import com.sklad.er71.presentation.recipe.RecipeActivity;
+import com.sklad.er71.util.LocalSharedUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -111,7 +112,7 @@ public class PreferentialPrescriptionActivity extends BaseActivity implements Re
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
             SoapObject request = new SoapObject(NAMESPACE, METHODNAME);
-            request.addProperty("SNILS", "001-001-001 02");
+            request.addProperty("SNILS", LocalSharedUtil.getSnilsParameter(getApplicationContext()));
 
 
             envelope.bodyOut = request;
@@ -133,6 +134,7 @@ public class PreferentialPrescriptionActivity extends BaseActivity implements Re
                 try {
                     jsonObj = XML.toJSONObject(responseDump);
                 } catch (JSONException e) {
+                    e.printStackTrace();
                     showError(e.getMessage());
                     stopLoaderUiThread();
                 }
@@ -143,11 +145,13 @@ public class PreferentialPrescriptionActivity extends BaseActivity implements Re
 
 
             } catch (IOException e) {
+                e.printStackTrace();
                 showError(e.getMessage());
                 stopLoaderUiThread();
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
             showError(e.getMessage());
             stopLoaderUiThread();
         }

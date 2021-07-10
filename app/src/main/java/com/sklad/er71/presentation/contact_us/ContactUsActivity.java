@@ -33,11 +33,11 @@ public class ContactUsActivity extends BaseActivity {
             showError("Неправильный формат электронной почты");
             return false;
         }
-        if (title.getText().toString().trim().length() > 0) {
+        if (title.getText().toString().trim().length() == 0) {
             showError("Заголовок не должен быть пустым");
             return false;
         }
-        if (text.getText().toString().trim().length() > 0) {
+        if (text.getText().toString().trim().length() == 0) {
             showError("Сообщение не должно быть пустым");
             return false;
         }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/fragmentHome"
+    android:id="@+id/navigation_main">
+
+    <fragment
+        android:id="@+id/fragmentHome"
+        android:name="com.sklad.er71.presentation.home.HomeActivity"
+        tools:layout="@layout/activity_home"
+        android:label="fragment_home" />
+    <fragment
+        android:id="@+id/fragmentRecipes"
+        android:name="com.sklad.er71.presentation.recipes.PreferentialPrescriptionActivity"
+        tools:layout="@layout/activity_preferential_prescription"
+        android:label="activity_preferential_prescription" />
+    <fragment
+        android:id="@+id/fragmentContactUs"
+        android:name="com.sklad.er71.presentation.contact_us.ContactUsActivity"
+        tools:layout="@layout/activity_contact_us"
+        android:label="activity_contact_us" />
+    <fragment
+        android:id="@+id/fragmentProfile"
+        android:name="com.sklad.er71.presentation.profile.ProfileActivity"
+        tools:layout="@layout/activity_profile"
+        android:label="activity_profile" />
+    <fragment
+        android:id="@+id/fragmentChangePassword"
+        android:name="com.sklad.er71.presentation.change_password.ChangePasswordActivity"
+        tools:layout="@layout/activity_change_password"
+        android:label="activity_change_password" />
+
+    <fragment
+        android:id="@+id/fragmentRecipe"
+        android:name="com.sklad.er71.presentation.recipe.RecipeActivity"
+        tools:layout="@layout/activity_recipe"
+        android:label="activity_recipe" />
+</navigation>

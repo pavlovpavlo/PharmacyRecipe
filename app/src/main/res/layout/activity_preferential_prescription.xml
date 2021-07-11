@@ -9,43 +9,88 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background"
+        android:paddingBottom="65dp"
         android:gravity="center"
-        android:orientation="vertical"
-        tools:context=".presentation.reg.RegistrationActivity">
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Льготные рецепты"
-            android:textColor="@color/black"
-            android:textSize="28dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recipes"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="28dp" />
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:fontFamily="@font/century_gothic_bold"
+                android:includeFontPadding="false"
+                android:text="электронные\nрецепты 71 +"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="16dp"
+            android:background="#74bdb0"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/verdana_bold"
+                android:includeFontPadding="false"
+                android:text="Список льготных рецептов"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_list"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recipes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:scrollbars="none"
+                />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/no_recipes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/bg_list"
+            android:fontFamily="@font/verdana_bold"
             android:gravity="center"
             android:text="На данный момент нет доступных рецептов"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp" />
     </LinearLayout>
-
-    <include
-        layout="@layout/layout_error"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <include
-        layout="@layout/custom_loader"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,20 @@
 package com.sklad.er71.presentation.recipes;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -16,7 +23,10 @@ import com.sklad.er71.Enum.Recipe_SNILS.MTablerowrecipe;
 import com.sklad.er71.Enum.Recipe_SNILS.RecipeSNILSResponse;
 import com.sklad.er71.R;
 import com.sklad.er71.busines.BaseActivity;
+import com.sklad.er71.presentation.menu.MenuActivity;
+import com.sklad.er71.presentation.profile.ProfileActivity;
 import com.sklad.er71.presentation.recipe.RecipeActivity;
+import com.sklad.er71.presentation.recipe.RecipeQRDialog;
 import com.sklad.er71.util.LocalSharedUtil;
 
 import org.json.JSONException;
@@ -39,38 +49,54 @@ import static com.sklad.er71.util.Util.SOAP_ACTION;
 import static com.sklad.er71.util.Util.USER_PASSWORD;
 import static com.sklad.er71.util.Util.WSDL;
 
-public class PreferentialPrescriptionActivity extends BaseActivity implements RecipesAdapter.OnRecipeClickListener {
+public class PreferentialPrescriptionActivity extends Fragment implements RecipesAdapter.OnRecipeClickListener {
 
     private static String TAG = "soap";
     private RecipesAdapter adapter;
     private RecyclerView recipes;
     private TextView noRecipes;
+    private MenuActivity mainActivity;
+    private View root;
+    private NavController controller;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preferential_prescription);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MenuActivity) {
+            mainActivity = (MenuActivity) context;
+        }
+    }
+
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        root = inflater.inflate(R.layout.activity_preferential_prescription, container, false);
+
         initViews();
+
+        return root;
     }
 
     private void initViews() {
-        recipes = findViewById(R.id.recipes);
-        noRecipes = findViewById(R.id.no_recipes);
+        controller = NavHostFragment.findNavController(PreferentialPrescriptionActivity.this);
+        recipes = root.findViewById(R.id.recipes);
+        noRecipes = root.findViewById(R.id.no_recipes);
         adapter = new RecipesAdapter();
         adapter.setListener(this);
 
-        recipes.setLayoutManager(new LinearLayoutManager(this));
+        recipes.setLayoutManager(new LinearLayoutManager(mainActivity));
 
         recipes.setAdapter(adapter);
 
-        startLoader();
+        mainActivity.startLoader();
         Thread thread = new Thread(() -> {
             try {
                 RecipeSNILSResponse obj = GetRecipe_SNILS();
 
                 setData(obj);
             } catch (Exception e) {
-                showError(e.getMessage());
+                mainActivity.showError(e.getMessage());
                 stopLoaderUiThread();
             }
 
@@ -81,11 +107,16 @@ public class PreferentialPrescriptionActivity extends BaseActivity implements Re
     }
 
     private void stopLoaderUiThread() {
-        runOnUiThread(this::stopLoader);
+        mainActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mainActivity.stopLoader();
+            }
+        });
     }
 
     private void setData(RecipeSNILSResponse obj) {
-        runOnUiThread(() -> {
+        mainActivity.runOnUiThread(() -> {
             try {
                 if (obj.getSoapEnvelope().getSoapBody().getmGetRecipeSNILSResponse().getmReturn().getmTablerowrecipe().size() > 0) {
                     adapter.setList(obj.getSoapEnvelope().getSoapBody().getmGetRecipeSNILSResponse().getmReturn().getmTablerowrecipe());
@@ -101,7 +132,7 @@ public class PreferentialPrescriptionActivity extends BaseActivity implements Re
             }
 
 
-            stopLoader();
+            mainActivity.stopLoader();
         });
     }
 
@@ -112,7 +143,7 @@ public class PreferentialPrescriptionActivity extends BaseActivity implements Re
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
             SoapObject request = new SoapObject(NAMESPACE, METHODNAME);
-            request.addProperty("SNILS", LocalSharedUtil.getSnilsParameter(getApplicationContext()));
+            request.addProperty("SNILS", LocalSharedUtil.getSnilsParameter(mainActivity));
 
 
             envelope.bodyOut = request;
@@ -135,7 +166,7 @@ public class PreferentialPrescriptionActivity extends BaseActivity implements Re
                     jsonObj = XML.toJSONObject(responseDump);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    showError(e.getMessage());
+                    mainActivity.showError(e.getMessage());
                     stopLoaderUiThread();
                 }
 
@@ -146,13 +177,13 @@ public class PreferentialPrescriptionActivity extends BaseActivity implements Re
 
             } catch (IOException e) {
                 e.printStackTrace();
-                showError(e.getMessage());
+                mainActivity.showError(e.getMessage());
                 stopLoaderUiThread();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            showError(e.getMessage());
+            mainActivity.showError(e.getMessage());
             stopLoaderUiThread();
         }
         return Recipe;
@@ -160,8 +191,13 @@ public class PreferentialPrescriptionActivity extends BaseActivity implements Re
 
     @Override
     public void serviceSelected(MTablerowrecipe item) {
-        Intent intent = new Intent(this, RecipeActivity.class);
-        intent.putExtra("recipe", item);
-        startActivity(intent);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("recipe", item);
+        controller.navigate(R.id.fragmentRecipe, bundle);
+    }
+
+    @Override
+    public void openQr(MTablerowrecipe item) {
+        RecipeQRDialog.display(mainActivity.getSupportFragmentManager(), item.getmQRString());
     }
 }

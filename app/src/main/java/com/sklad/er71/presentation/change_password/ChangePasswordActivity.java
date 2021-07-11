@@ -1,9 +1,12 @@
 package com.sklad.er71.presentation.change_password;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,20 +28,34 @@ import com.google.firebase.auth.FirebaseUser;
 import com.sklad.er71.R;
 import com.sklad.er71.busines.BaseActivity;
 import com.sklad.er71.presentation.login.LoginActivity;
+import com.sklad.er71.presentation.menu.MenuActivity;
 import com.sklad.er71.util.Util;
 
-public class ChangePasswordActivity extends BaseActivity {
+public class ChangePasswordActivity extends Fragment {
 
     LinearLayout btn_login;
     EditText login, pass, new_pas;
+    private MenuActivity mainActivity;
+    private View root;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_password);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MenuActivity) {
+            mainActivity = (MenuActivity) context;
+        }
+    }
+
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        root = inflater.inflate(R.layout.activity_change_password, container, false);
 
         initView();
         initLis();
+
+        return root;
     }
 
     private void initLis() {
@@ -50,15 +68,15 @@ public class ChangePasswordActivity extends BaseActivity {
 
     private boolean checkData() {
         if (!Util.isValidEmail(login.getText().toString().trim())) {
-            showError("Неправильный формат электронной почты");
+            mainActivity.showError("Неправильный формат электронной почты");
             return false;
         }
         if (pass.getText().toString().trim().length() < 6) {
-            showError("Не верный пароль!");
+            mainActivity.showError("Не верный пароль!");
             return false;
         }
         if (new_pas.getText().toString().trim().length() < 6) {
-            showError("Пароль должен быть не менее 6 символов");
+            mainActivity.showError("Пароль должен быть не менее 6 символов");
             return false;
         }
 
@@ -68,7 +86,7 @@ public class ChangePasswordActivity extends BaseActivity {
     private void changePassword() {
         btn_login.setEnabled(false);
 
-        startLoader();
+        mainActivity.startLoader();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -80,36 +98,36 @@ public class ChangePasswordActivity extends BaseActivity {
                     if (task.isSuccessful()) {
                         user.updatePassword(new_pas.getText().toString()).addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "Пароль успешно изменен", Toast.LENGTH_LONG).show();
+                                Toast.makeText(mainActivity, "Пароль успешно изменен", Toast.LENGTH_LONG).show();
                                 /*Intent intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
                                 startActivity(intent);*/
-                                finish();
+                                mainActivity.onBackPressed();
                             } else {
-                                showError("Ошибка смены пароля");
+                                mainActivity.showError("Ошибка смены пароля");
                                 btn_login.setEnabled(true);
-                                stopLoader();
+                                mainActivity.stopLoader();
 
                             }
                         }).addOnFailureListener(e -> {
-                            showError(e.getMessage());
+                            mainActivity.showError(e.getMessage());
                             btn_login.setEnabled(true);
-                            stopLoader();
+                            mainActivity.stopLoader();
                         });
                     }
                 }).addOnFailureListener(e -> {
             if (e instanceof FirebaseAuthInvalidCredentialsException)
-                showError("Неверный email и/или пароль");
+                mainActivity.showError("Неверный email и/или пароль");
             else
-                showError("Ошибка смены пароля");
+                mainActivity.showError("Ошибка смены пароля");
             btn_login.setEnabled(true);
-            stopLoader();
+            mainActivity.stopLoader();
         });
     }
 
     private void initView() {
-        btn_login = findViewById(R.id.change);
-        login = findViewById(R.id.text_login);
-        pass = findViewById(R.id.text_password);
-        new_pas = findViewById(R.id.text_password2);
+        btn_login = root.findViewById(R.id.change);
+        login = root.findViewById(R.id.text_login);
+        pass = root.findViewById(R.id.text_password);
+        new_pas = root.findViewById(R.id.text_password2);
     }
 }

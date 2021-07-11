@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.sklad.er71.presentation.login.LoginActivity;
 import com.sklad.er71.presentation.menu.MenuActivity;
 import com.sklad.er71.R;
 import com.sklad.er71.util.LocalSharedUtil;
@@ -21,12 +22,12 @@ public class SplashScreen extends AppCompatActivity {
         new Handler(Looper.getMainLooper()).postDelayed(this::openNextScreen, 400L);
     }
 
-    private void openNextScreen(){
+    private void openNextScreen() {
         if (!LocalSharedUtil.getSnilsParameter(getApplicationContext()).equals("")
-                && FirebaseAuth.getInstance().getCurrentUser()!= null){
+                && FirebaseAuth.getInstance().getCurrentUser() != null) {
             startActivity(new Intent(this, MenuActivity.class));
-        }else{
-            startActivity(new Intent(this, MainActivity.class));
+        } else {
+            startActivity(new Intent(this, LoginActivity.class));
         }
         finish();
     }

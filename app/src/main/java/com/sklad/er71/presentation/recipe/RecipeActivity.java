@@ -1,12 +1,18 @@
 package com.sklad.er71.presentation.recipe;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +23,7 @@ import com.sklad.er71.Enum.Recipe_SNILS.RecipeSNILSResponse;
 import com.sklad.er71.Enum.ResiduesPharm.ResiduesPharmResponse;
 import com.sklad.er71.R;
 import com.sklad.er71.busines.BaseActivity;
+import com.sklad.er71.presentation.menu.MenuActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,26 +45,73 @@ import static com.sklad.er71.util.Util.SOAP_ACTION_NEXT;
 import static com.sklad.er71.util.Util.USER_PASSWORD;
 import static com.sklad.er71.util.Util.WSDL;
 
-public class RecipeActivity extends BaseActivity {
+public class RecipeActivity extends Fragment {
 
     private MTablerowrecipe item;
-    private TextView recipe;
+    private View root;
+    private TextView lpu;
+    private TextView doctor;
+    private TextView endDate;
+    private TextView name;
+    private TextView mnn;
+    private TextView medForm;
+    private TextView doza;
+    private TextView kolUp;
+    private TextView kolV;
+    private TextView info;
     private LinearLayout map;
     private LinearLayout qr;
-    private LinearLayout detail;
+    private MenuActivity mainActivity;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MenuActivity) {
+            mainActivity = (MenuActivity) context;
+        }
+    }
 
-        recipe = findViewById(R.id.recipe);
-        map = findViewById(R.id.map);
-        qr = findViewById(R.id.qr);
-        detail = findViewById(R.id.detail);
-        item = (MTablerowrecipe) getIntent().getSerializableExtra("recipe");
 
-        recipe.setText(item.toString());
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        root = inflater.inflate(R.layout.activity_recipe, container, false);
+
+        initViews();
+        initListeners();
+        startRequest();
+
+        return root;
+    }
+
+    private void initViews() {
+        info = root.findViewById(R.id.info);
+        lpu = root.findViewById(R.id.lpu);
+        doctor = root.findViewById(R.id.doctor);
+        endDate = root.findViewById(R.id.end_date);
+        name = root.findViewById(R.id.name);
+        mnn = root.findViewById(R.id.mnn);
+        medForm = root.findViewById(R.id.med_form);
+        doza = root.findViewById(R.id.doza);
+        kolUp = root.findViewById(R.id.kol_up);
+        kolV = root.findViewById(R.id.kol_v);
+        map = root.findViewById(R.id.map_btn);
+        qr = root.findViewById(R.id.qr_btn);
+        item = (MTablerowrecipe) getArguments().getSerializable("recipe");
+
+        info.setText("Рецепт " + item.getmSeries() + " " + item.getmNumber());
+        lpu.setText(item.getmLPU());
+        doctor.setText(item.getmDoctor());
+        endDate.setText(item.getmSrok());
+        name.setText(item.getmTrademark());
+        mnn.setText(item.getmMNN());
+        medForm.setText(item.getmLF());
+        doza.setText(item.getmDosage());
+        kolUp.setText(item.getmPack());
+        kolV.setText(item.getmKolV().toString());
+    }
+
+    private void initListeners() {
         map.setOnClickListener(v -> {
             Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/?api=1&destination="
                     + item.getmLPU() + "&travelmode=driving");
@@ -65,45 +119,33 @@ public class RecipeActivity extends BaseActivity {
             mapIntent.setPackage("com.google.android.apps.maps");
             startActivity(mapIntent);
         });
+        qr.setOnClickListener(v -> RecipeQRDialog.display(mainActivity.getSupportFragmentManager(), item.getmQRString()));
+    }
 
-        qr.setOnClickListener(v -> RecipeQRDialog.display(getSupportFragmentManager(), item.getmQRString()));
-
-        startLoader();
+    private void startRequest() {
+        mainActivity.startLoader();
         Thread thread = new Thread(() -> {
             try {
                 ResiduesPharmResponse obj = ResiduesPharm();
 
                 setData(obj);
             } catch (Exception e) {
-                showError(e.getMessage());
+                mainActivity.showError(e.getMessage());
                 stopLoaderUiThread();
             }
         });
 
         thread.start();
-
     }
 
     private void setData(ResiduesPharmResponse obj) {
-        runOnUiThread(() -> {
-            if (obj.getSoapEnvelope().getSoapBody().getmResiduesPharmResponse().getmReturn().getmTablerowapp() != null) {
-
-                detail.setVisibility(View.VISIBLE);
-                detail.setOnClickListener(v -> {
-                    Intent intent = new Intent(this, RecipeDetailActivity.class);
-                    intent.putExtra("recipe", obj.getSoapEnvelope().getSoapBody().getmResiduesPharmResponse().getmReturn());
-                    startActivity(intent);
-                });
-            }else{
-                detail.setVisibility(View.GONE);
-                //recipe.setText("Нет данных о рецепте");
-            }
-            stopLoader();
+        mainActivity.runOnUiThread(() -> {
+            mainActivity.stopLoader();
         });
     }
 
     private void stopLoaderUiThread() {
-        runOnUiThread(this::stopLoader);
+        mainActivity.runOnUiThread(() -> mainActivity.stopLoader());
     }
 
     public ResiduesPharmResponse ResiduesPharm() {
@@ -138,10 +180,9 @@ public class RecipeActivity extends BaseActivity {
                 try {
                     jsonObj = XML.toJSONObject(responseDump);
                 } catch (JSONException e) {
-                    showError(e.getMessage());
+                    mainActivity.showError(e.getMessage());
                     stopLoaderUiThread();
                 }
-
 
                 Log.d("JSON_2", jsonObj.toString());
 
@@ -150,12 +191,12 @@ public class RecipeActivity extends BaseActivity {
                 Recipe = gson.fromJson(jsonObj.toString(), ResiduesPharmResponse.class);
 
             } catch (IOException e) {
-                showError(e.getMessage());
+                mainActivity.showError(e.getMessage());
                 stopLoaderUiThread();
             }
 
         } catch (Exception e) {
-            showError(e.getMessage());
+            mainActivity.showError(e.getMessage());
             stopLoaderUiThread();
         }
         return Recipe;

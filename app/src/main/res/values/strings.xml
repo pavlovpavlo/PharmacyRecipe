@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Электронный рецепт 71</string>
     <string name="password_recover"><u>Забыли пароль?</u></string>
-    <string name="text_recover_title">Восстановления пароля</string>
+    <string name="text_recover_title">Восстановление пароля</string>
     <string name="btn_text_recover">Восстановить</string>
+    <string name="qr"><u>QR код</u></string>
 </resources>

@@ -12,13 +12,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.ЭлектронныйРецепт71">
-        <activity android:name=".presentation.change_password.ChangePasswordActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".presentation.password_recover.PasswordRecoverActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".presentation.recipe.RecipeActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".presentation.recipes.PreferentialPrescriptionActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".presentation.recipes.RecipesActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".presentation.recipe.RecipeDetailActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".presentation.contact_us.ContactUsActivity" android:screenOrientation="portrait"/>
         <activity android:name=".presentation.reg.RegistrationActivity" android:screenOrientation="portrait"/>
         <activity android:name=".presentation.login.LoginActivity" android:screenOrientation="portrait"/>
         <activity android:name=".presentation.menu.MenuActivity" android:screenOrientation="portrait"/>
@@ -29,7 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.MainActivity" />
     </application>
 
 </manifest>

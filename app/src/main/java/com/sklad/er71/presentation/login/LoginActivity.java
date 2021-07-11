@@ -21,6 +21,7 @@ import com.sklad.er71.presentation.menu.MenuActivity;
 import com.sklad.er71.R;
 import com.sklad.er71.busines.BaseActivity;
 import com.sklad.er71.presentation.password_recover.PasswordRecoverActivity;
+import com.sklad.er71.presentation.reg.RegistrationActivity;
 import com.sklad.er71.util.LocalSharedUtil;
 import com.sklad.er71.util.Util;
 
@@ -28,7 +29,6 @@ public class LoginActivity extends BaseActivity {
 
     private EditText email;
     private EditText pass;
-    private LinearLayout auth;
     private FirebaseFirestore firestore;
     private String userId;
     private TextView text_password_recover;
@@ -44,7 +44,8 @@ public class LoginActivity extends BaseActivity {
         text_password_recover = findViewById(R.id.text_password_recover);
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
-        auth = findViewById(R.id.auth);
+        LinearLayout auth = findViewById(R.id.auth);
+        LinearLayout reg = findViewById(R.id.reg);
         firestore = FirebaseFirestore.getInstance();
 
         auth.setOnClickListener(v -> {
@@ -54,6 +55,8 @@ public class LoginActivity extends BaseActivity {
         text_password_recover.setOnClickListener(view -> {
             startActivity(new Intent(LoginActivity.this, PasswordRecoverActivity.class));
         });
+        reg.setOnClickListener(v ->
+                startActivity(new Intent(this, RegistrationActivity.class)));
 
     }
 

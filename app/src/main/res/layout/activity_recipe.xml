@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,102 +7,337 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background"
+        android:paddingBottom="65dp"
         android:gravity="center"
-        android:orientation="vertical"
-        tools:context=".presentation.reg.RegistrationActivity">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Рецепт"
-            android:textColor="@color/black"
-            android:textSize="28dp" />
-
-        <TextView
-            android:id="@+id/recipe"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:padding="10dp"
-            android:layout_weight="1"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:orientation="vertical"
-            android:gravity="bottom">
-
-            <LinearLayout
-                android:id="@+id/map"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="30dp"
-                android:background="@color/white"
-                android:clickable="true"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Карта"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/qr"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="30dp"
-                android:background="@color/white"
-                android:clickable="true"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="QR"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/detail"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:visibility="gone"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="30dp"
-                android:background="@color/white"
-                android:clickable="true"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Подробнее"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:src="@drawable/logo"
+                android:adjustViewBounds="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:textSize="17sp"
+                android:layout_marginStart="14dp"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:fontFamily="@font/century_gothic_bold"
+                android:text="электронные\nрецепты 71 +"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#74bdb0"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/verdana_bold"
+                android:textAllCaps="true"/>
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/bg_list"
+            android:layout_marginTop="16dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ЛПУ:"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/verdana_bold"/>
+                    <TextView
+                        android:id="@+id/lpu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_marginStart="3dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/verdana_reg"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Врач:"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/verdana_bold"/>
+                    <TextView
+                        android:id="@+id/doctor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_marginStart="3dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/verdana_reg"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Срок действия:"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/verdana_bold"/>
+                    <TextView
+                        android:id="@+id/end_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_marginStart="3dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/verdana_reg"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Торговое наименование:"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/verdana_bold"/>
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_marginStart="3dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/verdana_reg"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="МНН:"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/verdana_bold"/>
+                    <TextView
+                        android:id="@+id/mnn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_marginStart="3dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/verdana_reg"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Лекарственная форма:"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/verdana_bold"/>
+                    <TextView
+                        android:id="@+id/med_form"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_marginStart="3dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/verdana_reg"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Дозировка:"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/verdana_bold"/>
+                    <TextView
+                        android:id="@+id/doza"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_marginStart="3dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/verdana_reg"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Количество в упаковке:"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/verdana_bold"/>
+                    <TextView
+                        android:id="@+id/kol_up"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_marginStart="3dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/verdana_reg"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Количество выписано:"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:fontFamily="@font/verdana_bold"/>
+                    <TextView
+                        android:id="@+id/kol_v"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_marginStart="3dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/verdana_reg"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="13dp">
+                    <LinearLayout
+                        android:id="@+id/map_btn"
+                        android:clickable="true"
+                        android:layout_width="0dp"
+                        android:layout_height="75dp"
+                        android:gravity="center"
+                        android:padding="13dp"
+                        android:background="@drawable/bg_button"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="наличие в аптеках"
+                            android:layout_weight="1"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:fontFamily="@font/verdana_bold"/>
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/map"
+                            android:adjustViewBounds="true"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/qr_btn"
+                        android:clickable="true"
+                        android:layout_width="0dp"
+                        android:layout_height="75dp"
+                        android:gravity="center"
+                        android:padding="13dp"
+                        android:background="@drawable/bg_button"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="qr код"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:fontFamily="@font/verdana_bold"/>
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/qr_scan"
+                            android:adjustViewBounds="true"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
     </LinearLayout>
-
-    <include
-        layout="@layout/layout_error"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <include
-        layout="@layout/custom_loader"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

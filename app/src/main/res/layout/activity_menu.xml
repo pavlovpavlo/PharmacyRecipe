@@ -3,225 +3,109 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
 
-    <LinearLayout
+    <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
-        android:gravity="center"
-        android:orientation="vertical"
-        tools:context=".presentation.reg.RegistrationActivity">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="top|center_horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Меню"
-                android:textColor="@color/black"
-                android:textSize="28dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/preferential_prescription"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/white"
-                android:clickable="true"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Льготный рецепт"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/recipes"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/white"
-                android:clickable="true"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Рецепты"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/recover_pass"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/white"
-                android:clickable="true"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Изменить пароль"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/contact_us"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/white"
-                android:clickable="true"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Связаться с нами"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/quit"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/white"
-                android:clickable="true"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Выйти с аккаунта"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-
-    </LinearLayout>
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation_main" />
 
     <LinearLayout
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="50dp"
-        android:layout_height="wrap_content">
+        app:layout_constraintBottom_toBottomOf="parent">
+
         <LinearLayout
+            android:id="@+id/goToHome"
+            android:onClick="clickToTab"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_weight="1"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="5dp">
+
             <ImageView
-                android:layout_width="55dp"
-                android:layout_height="53dp"
+                android:id="@+id/image_item_1"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/home"/>
+                android:src="@drawable/ic_home_no_active" />
+
             <TextView
+                android:id="@+id/text_item_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="14dp"
-                android:layout_marginTop="6dp"
-                android:textAllCaps="true"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/tahoma_regular"
-                android:text="Главная"/>
+                android:text="Главная"
+                android:textAllCaps="true"
+                android:textColor="@color/tab_active"
+                android:textSize="11dp" />
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/goToRecipe"
+            android:onClick="clickToTab"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_weight="1"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="5dp">
+
             <ImageView
-                android:layout_width="48dp"
-                android:layout_height="54dp"
+                android:id="@+id/image_item_2"
+                android:layout_width="wrap_content"
+                android:layout_height="29dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/prescription"/>
+                android:src="@drawable/ic_prescription" />
+
             <TextView
+                android:id="@+id/text_item_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="14dp"
-                android:layout_marginTop="6dp"
-                android:textAllCaps="true"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/tahoma_regular"
-                android:text="рецепты"/>
+                android:text="рецепты"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="11dp" />
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/goToProfile"
+            android:onClick="clickToTab"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_weight="1"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="5dp">
+
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="53dp"
+                android:id="@+id/image_item_3"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/medicine"/>
+                android:src="@drawable/ic_user" />
+
             <TextView
+                android:id="@+id/text_item_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="14dp"
-                android:layout_marginTop="6dp"
-                android:textAllCaps="true"
-                android:textAlignment="center"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/tahoma_regular"
-                android:text="выписанные препараты"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center_horizontal">
-            <ImageView
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/user"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="14dp"
-                android:layout_marginTop="6dp"
+                android:text="профиль"
                 android:textAllCaps="true"
-                android:fontFamily="@font/tahoma_regular"
-                android:text="профиль"/>
+                android:textColor="@color/black"
+                android:textSize="11dp" />
         </LinearLayout>
     </LinearLayout>
 

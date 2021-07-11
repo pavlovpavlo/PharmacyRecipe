@@ -1,20 +1,25 @@
 package com.sklad.er71.presentation.menu;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.LinearLayout;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
+import androidx.navigation.Navigation;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.sklad.er71.Enum.TabBarItem;
 import com.sklad.er71.R;
-import com.sklad.er71.presentation.MainActivity;
-import com.sklad.er71.presentation.change_password.ChangePasswordActivity;
-import com.sklad.er71.presentation.contact_us.ContactUsActivity;
-import com.sklad.er71.presentation.recipes.PreferentialPrescriptionActivity;
-import com.sklad.er71.presentation.recipes.RecipesActivity;
+import com.sklad.er71.busines.BaseActivity;
+import com.sklad.er71.util.Util;
 
-public class MenuActivity extends AppCompatActivity {
+import java.util.List;
+
+public class MenuActivity extends BaseActivity {
+
+    public NavController navController;
+    private final List<TabBarItem> TAB_BAR_LIST = Util.generateTabBar();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,32 +30,46 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        LinearLayout preferentialPrescription = findViewById(R.id.preferential_prescription);
-        LinearLayout recipes = findViewById(R.id.recipes);
-        LinearLayout recover_pass = findViewById(R.id.recover_pass);
-        LinearLayout contact_us = findViewById(R.id.contact_us);
-        LinearLayout quit = findViewById(R.id.quit);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+    }
 
-        preferentialPrescription.setOnClickListener(v ->
-                startActivity(new Intent(this, PreferentialPrescriptionActivity.class)));
+    public void clickToTab(View v){
+        switch (v.getId()) {
+            case R.id.goToHome:
+                setActiveMenu(0);
+                NavOptions.Builder navBuilder = new NavOptions.Builder();
+                NavOptions navOptions = navBuilder.setPopUpTo(R.id.fragmentHome, true).build();
+                navController.navigate(R.id.fragmentHome, null, navOptions);
+                break;
+            case R.id.goToProfile:
+                setActiveMenu(2);
+                navController.navigate(R.id.fragmentProfile, null);
+                break;
+            case R.id.goToRecipe:
+                setActiveMenu(1);
+                navController.navigate(R.id.fragmentRecipes, null);
+                break;
+        }
+    }
 
-        recipes.setOnClickListener(v ->
-                startActivity(new Intent(this, RecipesActivity.class)));
+    public void setActiveMenu(int index) {
+        TabBarItem item;
+        if (index != -1)
+            item = TAB_BAR_LIST.get(index);
+        else
+            item = null;
 
-        recover_pass.setOnClickListener(view -> {
-            startActivity(new Intent(this, ChangePasswordActivity.class));
-        });
+        for (int i = 0; i < TAB_BAR_LIST.size(); i++) {
+            TabBarItem itemNotActive = TAB_BAR_LIST.get(i);
+            if (i != index) {
+                ((TextView) findViewById(itemNotActive.getTextViewID())).setTextColor(getResources().getColor(R.color.tab_active_no_active));
+                ((ImageView) findViewById(itemNotActive.getImageViewID())).setImageDrawable(getResources().getDrawable(itemNotActive.getImageNotActiveCode()));
+            }
+        }
 
-        contact_us.setOnClickListener(view -> {
-            startActivity(new Intent(this, ContactUsActivity.class));
-        });
-
-        quit.setOnClickListener(view -> {
-            startActivity(new Intent(this, MainActivity.class));
-            FirebaseAuth.getInstance().signOut();
-            finish();
-        });
-
-
+        if (index != -1) {
+            ((TextView) findViewById(item.getTextViewID())).setTextColor(getResources().getColor(R.color.tab_active));
+            ((ImageView) findViewById(item.getImageViewID())).setImageDrawable(getResources().getDrawable(item.getImageActiveCode()));
+        }
     }
 }

@@ -10,20 +10,20 @@
         android:layout_height="match_parent"
         android:background="@drawable/background"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="65dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.8"
+            android:layout_height="wrap_content"
             android:gravity="top|center_horizontal"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="10dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -55,74 +55,71 @@
                 android:gravity="center">
 
                 <TextView
-                    android:id="@+id/info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/verdana_bold"
                     android:includeFontPadding="false"
-                    android:text="Авторизация"
+                    android:text="Профиль"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@color/white"
-            android:ems="10"
-            android:fontFamily="@font/verdana_reg"
-            android:hint="Email"
-            android:inputType="text"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/pass"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
-            android:background="@color/white"
-            android:ems="10"
-            android:fontFamily="@font/verdana_reg"
-            android:hint="Пароль"
-            android:imeOptions="actionGo"
-            android:inputType="textPassword"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/text_password_recover"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/verdana_reg"
-            android:gravity="center"
-            android:text="@string/password_recover" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.8"
-            android:gravity="bottom"
+            android:gravity="center_vertical"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/verdana_bold"
+                    android:text="Личные данные"
+
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/verdana_reg" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#74bdb0" />
+
+                <TextView
+                    android:id="@+id/snils"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/verdana_reg" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#74bdb0" />
+            </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/auth"
+                android:id="@+id/recover_pass"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/bg_button_main"
@@ -133,14 +130,35 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/verdana_bold"
-                    android:text="Войти"
+                    android:text="Изменить пароль"
                     android:textAllCaps="true"
                     android:textColor="#277164"
                     android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/reg"
+                android:id="@+id/contact_us"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_button_main"
+                android:clickable="true"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/verdana_bold"
+                    android:text="Связаться с нами"
+                    android:textAllCaps="true"
+                    android:textColor="#277164"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/quit"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginStart="16dp"
@@ -154,7 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/verdana_bold"
-                    android:text="Зарегистрироваться"
+                    android:text="Выйти с аккаунта"
                     android:textAllCaps="true"
                     android:textColor="#277164"
                     android:textSize="14sp" />
@@ -162,15 +180,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <include
-        layout="@layout/layout_error"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <include
-        layout="@layout/custom_loader"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

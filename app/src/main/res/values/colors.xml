@@ -3,4 +3,6 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="tab_active">#40A28F</color>
+    <color name="tab_active_no_active">#FF000000</color>
 </resources>

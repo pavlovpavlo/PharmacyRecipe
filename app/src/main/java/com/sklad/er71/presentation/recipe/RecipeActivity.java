@@ -59,6 +59,8 @@ public class RecipeActivity extends Fragment {
     private TextView kolUp;
     private TextView kolV;
     private TextView info;
+    private TextView date;
+    private TextView status;
     private LinearLayout map;
     private LinearLayout qr;
     private MenuActivity mainActivity;
@@ -86,6 +88,8 @@ public class RecipeActivity extends Fragment {
 
     private void initViews() {
         info = root.findViewById(R.id.info);
+        date = root.findViewById(R.id.date);
+        status = root.findViewById(R.id.status);
         lpu = root.findViewById(R.id.lpu);
         doctor = root.findViewById(R.id.doctor);
         endDate = root.findViewById(R.id.end_date);
@@ -100,6 +104,7 @@ public class RecipeActivity extends Fragment {
         item = (MTablerowrecipe) getArguments().getSerializable("recipe");
 
         info.setText("Рецепт " + item.getmSeries() + " " + item.getmNumber());
+        date.setText("от " + item.getmData());
         lpu.setText(item.getmLPU());
         doctor.setText(item.getmDoctor());
         endDate.setText(item.getmSrok());
@@ -109,6 +114,39 @@ public class RecipeActivity extends Fragment {
         doza.setText(item.getmDosage());
         kolUp.setText(item.getmPack());
         kolV.setText(item.getmKolV().toString());
+
+        switch (item.getmStatus()){
+            case 1:
+                status.setText("зарезервирован");
+                break;
+            case 11:
+                status.setText("ожидание пациента");
+                break;
+            case 12:
+                status.setText("неявка пациента");
+                map.setVisibility(View.GONE);
+                qr.setVisibility(View.GONE);
+                break;
+            case 13:
+                status.setText("обслужен");
+                map.setVisibility(View.GONE);
+                qr.setVisibility(View.GONE);
+                break;
+            case 14:
+                status.setText("отказ, нет в наличии");
+                map.setVisibility(View.GONE);
+                qr.setVisibility(View.GONE);
+                break;
+            case 15:
+                status.setText("отсроченное обслуживание");
+                break;
+            case 3:
+                status.setText("резерв отменен аптекой");
+                break;
+            case 2:
+                status.setText("резерв отменен ЛПУ");
+                break;
+        }
     }
 
     private void initListeners() {

@@ -44,6 +44,14 @@
                 android:textColor="#277a6b"
                 android:fontFamily="@font/tahoma_regular"/>
             <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:layout_marginTop="3dp"
+                android:textColor="#313030"
+                android:fontFamily="@font/tahoma_regular"/>
+            <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

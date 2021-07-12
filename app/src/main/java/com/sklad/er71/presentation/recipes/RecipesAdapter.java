@@ -70,6 +70,33 @@ class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> {
             viewHolder.description.setTextColor(Color.parseColor("#313030"));
         }
 
+        switch (item.getmStatus()){
+            case 1:
+                viewHolder.status.setText("зарезервирован");
+                break;
+            case 11:
+                viewHolder.status.setText("ожидание пациента");
+                break;
+            case 12:
+                viewHolder.status.setText("неявка пациента");
+                break;
+            case 13:
+                viewHolder.status.setText("обслужен");
+                break;
+            case 14:
+                viewHolder.status.setText("отказ, нет в наличии");
+                break;
+            case 15:
+                viewHolder.status.setText("отсроченное обслуживание");
+                break;
+            case 3:
+                viewHolder.status.setText("резерв отменен аптекой");
+                break;
+            case 2:
+                viewHolder.status.setText("резерв отменен ЛПУ");
+                break;
+        }
+
         if(i == list.size() -1){
             viewHolder.line.setVisibility(View.GONE);
         }else
@@ -85,6 +112,7 @@ class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> {
 
         TextView title;
         TextView description;
+        TextView status;
         ImageView qr;
         View line;
 
@@ -92,6 +120,7 @@ class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> {
             super(itemView);
             title = itemView.findViewById(R.id.title);
             description = itemView.findViewById(R.id.description);
+            status = itemView.findViewById(R.id.status);
             qr = itemView.findViewById(R.id.qr);
             line = itemView.findViewById(R.id.line);
         }

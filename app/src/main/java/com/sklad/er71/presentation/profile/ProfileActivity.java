@@ -50,16 +50,14 @@ public class ProfileActivity extends Fragment {
     }
 
     private void initViews() {
-        LinearLayout recover_pass = root.findViewById(R.id.recover_pass);
         LinearLayout contact_us = root.findViewById(R.id.contact_us);
         LinearLayout quit = root.findViewById(R.id.quit);
-        TextView email = root.findViewById(R.id.email);
-        TextView snils = root.findViewById(R.id.snils);
+        TextView phone = root.findViewById(R.id.phone);
+        TextView name = root.findViewById(R.id.name_text);
+        TextView surname = root.findViewById(R.id.surname_text);
+        TextView birthday = root.findViewById(R.id.birthday_text);
+        TextView snils = root.findViewById(R.id.snils_text);
         controller = NavHostFragment.findNavController(ProfileActivity.this);
-
-        recover_pass.setOnClickListener(view -> {
-            controller.navigate(R.id.fragmentChangePassword);
-        });
 
         contact_us.setOnClickListener(view -> {
             controller.navigate(R.id.fragmentContactUs);
@@ -71,8 +69,11 @@ public class ProfileActivity extends Fragment {
             mainActivity.finish();
         });
 
-        email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        phone.setText(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber());
         snils.setText(LocalSharedUtil.getSnilsParameter(mainActivity));
+        name.setText(LocalSharedUtil.getNameParameter(mainActivity));
+        surname.setText(LocalSharedUtil.getSurnameParameter(mainActivity));
+        birthday.setText(LocalSharedUtil.getBirthdayParameter(mainActivity));
 
     }
 }

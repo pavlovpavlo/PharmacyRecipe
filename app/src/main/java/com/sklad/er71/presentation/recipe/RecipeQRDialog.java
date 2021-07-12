@@ -61,6 +61,12 @@ public class RecipeQRDialog extends DialogFragment {
         ImageView imageView = view.findViewById(R.id.image);
         Bitmap myBitmap = QRCode.from(text).bitmap();
         imageView.setImageBitmap(myBitmap);
+
+        view.findViewById(R.id.dialog_container).setOnClickListener(v -> {
+            dismiss();
+        });
+        imageView.setOnClickListener(v -> {
+        });
         return view;
     }
 

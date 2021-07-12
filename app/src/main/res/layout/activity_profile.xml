@@ -66,7 +66,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.8"
@@ -84,14 +84,22 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/verdana_bold"
                     android:text="Личные данные"
-
+                    android:layout_marginBottom="16dp"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
+
                 <TextView
-                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/verdana_reg"
+                    android:text="Телефон"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/verdana_reg" />
                 <View
@@ -101,10 +109,17 @@
                     android:background="#74bdb0" />
 
                 <TextView
-                    android:id="@+id/snils"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/verdana_reg"
+                    android:text="СНИЛС"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/snils_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/verdana_reg" />
                 <View
@@ -112,72 +127,108 @@
                     android:layout_height="1dp"
                     android:layout_marginBottom="10dp"
                     android:background="#74bdb0" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/recover_pass"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/bg_button_main"
-                android:clickable="true"
-                android:gravity="center">
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/verdana_reg"
+                    android:text="Имя"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/name_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/verdana_bold"
-                    android:text="Изменить пароль"
-                    android:textAllCaps="true"
-                    android:textColor="#277164"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/contact_us"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/bg_button_main"
-                android:clickable="true"
-                android:gravity="center">
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/verdana_reg" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#74bdb0" />
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/verdana_reg"
+                    android:text="Фамилия"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/surname_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/verdana_bold"
-                    android:text="Связаться с нами"
-                    android:textAllCaps="true"
-                    android:textColor="#277164"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/quit"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/bg_button_main"
-                android:clickable="true"
-                android:gravity="center">
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/verdana_reg" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#74bdb0" />
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/verdana_reg"
+                    android:text="Дата рождения"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/birthday_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/verdana_bold"
-                    android:text="Выйти с аккаунта"
-                    android:textAllCaps="true"
-                    android:textColor="#277164"
-                    android:textSize="14sp" />
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/verdana_reg" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="#74bdb0" />
+
+                <LinearLayout
+                    android:id="@+id/contact_us"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/bg_button_main"
+                    android:clickable="true"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/verdana_bold"
+                        android:text="Связаться с нами"
+                        android:textAllCaps="true"
+                        android:textColor="#277164"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/quit"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/bg_button_main"
+                    android:clickable="true"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/verdana_bold"
+                        android:text="Выйти с аккаунта"
+                        android:textAllCaps="true"
+                        android:textColor="#277164"
+                        android:textSize="14sp" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

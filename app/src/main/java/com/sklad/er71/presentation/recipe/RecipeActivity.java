@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Context;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,7 +23,9 @@ import com.sklad.er71.Enum.Recipe_SNILS.MTablerowrecipe;
 import com.sklad.er71.Enum.Recipe_SNILS.RecipeSNILSResponse;
 import com.sklad.er71.Enum.ResiduesPharm.ResiduesPharmResponse;
 import com.sklad.er71.R;
+import com.sklad.er71.Repository.SingletonClassApp;
 import com.sklad.er71.busines.BaseActivity;
+import com.sklad.er71.presentation.maps.MapsActivity;
 import com.sklad.er71.presentation.menu.MenuActivity;
 
 import org.json.JSONException;
@@ -150,12 +153,19 @@ public class RecipeActivity extends Fragment {
     }
 
     private void initListeners() {
+
         map.setOnClickListener(v -> {
-            Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/?api=1&destination="
-                    + item.getmLPU() + "&travelmode=driving");
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-            mapIntent.setPackage("com.google.android.apps.maps");
-            startActivity(mapIntent);
+//            Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/?api=1&destination="
+//                    + item.getmLPU() + "&travelmode=driving");
+//            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+//            mapIntent.setPackage("com.google.android.apps.maps");
+
+            Intent intent = new Intent(getActivity(), MapsActivity.class);
+            startActivity(intent);
+
+
+
+
         });
         qr.setOnClickListener(v -> RecipeQRDialog.display(mainActivity.getSupportFragmentManager(), item.getmQRString()));
     }
@@ -227,6 +237,9 @@ public class RecipeActivity extends Fragment {
                 Gson gson = new GsonBuilder().create();
 
                 Recipe = gson.fromJson(jsonObj.toString(), ResiduesPharmResponse.class);
+
+                SingletonClassApp.getInstance().recipe=Recipe;
+
 
             } catch (IOException e) {
                 mainActivity.showError(e.getMessage());

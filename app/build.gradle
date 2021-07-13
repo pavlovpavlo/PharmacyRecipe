@@ -48,6 +48,15 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
+    // Облегчённая библиотека, содержит только карту, слой пробок,
+    // LocationManager, UserLocationLayer и возможность скачивать оффлайн карты (только в платной версии).
+    implementation 'com.yandex.android:maps.mobile:4.0.0-lite'
+
+    // Полная библиотека в дополнение к lite версии предоставляет автомобильную маршрутизацию,
+    // веломаршрутизацию, пешеходную маршрутизацию и маршрутизацию на общественном транспорте,
+    // поиск, suggest, геокодирование и отображение панорам.
+     implementation 'com.yandex.android:maps.mobile:4.0.0-full'
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

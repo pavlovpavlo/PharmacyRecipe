@@ -17,4 +17,11 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="background">@android:color/transparent</item>
     </style>
+
+    <style name="popup_window_animation_phone" parent="android:Animation">
+
+        <item name="android:windowEnterAnimation">@anim/slid_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_doun</item>
+
+    </style>
 </resources>

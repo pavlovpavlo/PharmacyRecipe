@@ -1,12 +1,21 @@
 package com.sklad.er71.presentation.maps;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +52,7 @@ public class MapsActivity extends AppCompatActivity {
     private MapView mapView;
     private MapObjectCollection mapObjects;
     private Handler animationHandler;
-
+    private PopupWindow mypopupWindow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
@@ -110,7 +119,7 @@ public class MapsActivity extends AppCompatActivity {
                 mark.setOpacity(0.5f);
                 mark.setIcon(ImageProvider.fromResource(this, R.drawable.icon_marker));
                 mark.setDraggable(true);
-                mark.setUserData(new CircleMapObjectUserData(r.getmTN(), r.getmLF(), r.getmDosage(), String.valueOf(r.getmKSo())));
+                mark.setUserData(new CircleMapObjectUserData(r.getmDrugstore().getmName(),r.getmTN(), r.getmLF(), r.getmDosage(), String.valueOf(r.getmKSo())));
                 mark.addTapListener(circleMapObjectTapListener);
 
                 //   createPlacemarkMapObjectWithViewProvider();
@@ -134,13 +143,22 @@ public class MapsActivity extends AppCompatActivity {
                 if (userData instanceof CircleMapObjectUserData) {
                     CircleMapObjectUserData circleUserData = (CircleMapObjectUserData) userData;
 
-                    Toast toast = Toast.makeText(
-                            getApplicationContext(),
-                            circleUserData.tn + " "
-                                    + circleUserData.lf + " " + circleUserData.dosoge + " " +
-                                    circleUserData.k_so + " ",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
+                    setPopUpWindow(circleUserData);
+                   // mypopupWindow.setAnimationStyle(R.style.popup_window_animation_phone);
+                    //mypopupWindow.showAsDropDown(view_toch_botom, Math.round(Helper.pxFromDp(getContext(), 0)), Math.round(Helper.pxFromDp(getContext(), 10)));
+
+                    mypopupWindow.setOutsideTouchable(true);
+                    mypopupWindow.update();
+                    mypopupWindow.showAtLocation(mapView, Gravity.BOTTOM, 0, 0);
+
+
+//                    Toast toast = Toast.makeText(
+//                            getApplicationContext(),
+//                            circleUserData.tn + " "
+//                                    + circleUserData.lf + " " + circleUserData.dosoge + " " +
+//                                    circleUserData.k_so + " ",
+//                            Toast.LENGTH_SHORT);
+//                    toast.show();
                 }
             }
             return true;
@@ -148,13 +166,14 @@ public class MapsActivity extends AppCompatActivity {
     };
 
     private class CircleMapObjectUserData {
-
+        final String name;
         final String tn;
         final String lf;
         final String dosoge;
         final String k_so;
 
-        CircleMapObjectUserData(String tn, String lf, String dosoge, String k_so) {
+        CircleMapObjectUserData(String name,String tn, String lf, String dosoge, String k_so) {
+            this.name = name;
             this.tn = tn;
             this.lf = lf;
             this.dosoge = dosoge;
@@ -175,4 +194,34 @@ public class MapsActivity extends AppCompatActivity {
                 mapObjects.addPlacemark(new Point(Recipi.get(0).getmDrugstoreY(), Recipi.get(0).getmDrugstoreX()), imageProvider, new IconStyle());
         animatedPlacemark.useAnimation().play();
     }
+
+
+    private void setPopUpWindow(CircleMapObjectUserData userData) {
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(getApplicationContext().LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.popupmyclub, null);
+
+        mypopupWindow = new PopupWindow(view, RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT, true);
+        mypopupWindow.setAnimationStyle(R.style.popup_window_animation_phone);
+        mypopupWindow.setOutsideTouchable(false);
+
+        TextView name_title = (TextView) view.findViewById(R.id.text_name);
+        TextView name = (TextView) view.findViewById(R.id.id_name2);
+        TextView id_lf2 = (TextView) view.findViewById(R.id.id_lf2);
+        TextView id_doz2 = (TextView) view.findViewById(R.id.id_doz2);
+        TextView id_count2 = (TextView) view.findViewById(R.id.id_count2);
+          name_title.setText(userData.name);
+          name.setText(userData.tn);
+          id_lf2.setText(userData.lf);
+          id_doz2.setText(userData.dosoge);
+          id_count2.setText(userData.k_so);
+
+    }
+
+
+
+
+
+
 }
